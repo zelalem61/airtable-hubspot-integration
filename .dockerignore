@@ -1,0 +1,8 @@
+node_modules
+dist
+.env
+.git
+.assessment-render
+Migration Data.zip
+*.docx
+migration-report.json

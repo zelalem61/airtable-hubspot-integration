@@ -1,0 +1,41 @@
+{
+  "name": "airtable-hubspot-assessment",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HubSpot migration and real-time Airtable sync assessment",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/src/app.js",
+    "migrate": "tsx src/cli/migrate.ts",
+    "setup:hubspot": "tsx src/cli/setup-hubspot.ts",
+    "setup:airtable": "tsx src/cli/setup-airtable.ts",
+    "validate:data": "tsx src/cli/validate-data.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint ."
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.16.0",
+  "dependencies": {
+    "adm-zip": "^0.5.16",
+    "csv-parse": "^6.1.0",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "zod": "^4.0.17"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.33.0",
+    "@types/express": "^5.0.3",
+    "@types/adm-zip": "^0.5.7",
+    "@types/node": "^24.3.0",
+    "eslint": "^9.33.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.40.0",
+    "vitest": "^3.2.4"
+  }
+}

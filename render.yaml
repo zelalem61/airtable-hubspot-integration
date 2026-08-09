@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: airtable-hubspot-sync
+    runtime: node
+    plan: free
+    buildCommand: corepack enable && pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: 24.8.0
+      - key: HUBSPOT_ACCESS_TOKEN
+        sync: false
+      - key: AIRTABLE_ACCESS_TOKEN
+        sync: false
+      - key: AIRTABLE_BASE_ID
+        sync: false
+      - key: AIRTABLE_WEBHOOK_SECRET
+        generateValue: true

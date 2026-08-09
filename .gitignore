@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.env
+*.log
+.assessment-render/
+migration-report.json
