@@ -61,18 +61,6 @@ The migration processes records in dependency order:
 
 Stable custom identifiers (`source_company_id`, `source_contact_id`, and `source_deal_id`) make the migration safe to rerun. Individual failures are collected without terminating the whole job, and the final result is written to `migration-report.json`.
 
-### Source-data findings
-
-The supplied data contains 300 companies, 400 contacts, and 400 deals. Validation identified:
-
-- Five contacts referencing missing companies.
-- Two deals referencing missing companies.
-- Eight deals with blank amounts.
-- 398 deals whose company differs from the referenced contact's company.
-- Mixed date, boolean, currency, percentage, and industry formats.
-
-Explicit source relationships are preserved independently. Invalid associations are logged and skipped rather than guessed or silently changed.
-
 ## Part 2: Real-time integration
 
 Airtable's native Webhooks API notifies the service when a watched business field changes. The notification contains a webhook ID; the service retrieves the change payload using Airtable's cursor API, fetches the current record, and synchronizes it to HubSpot.
