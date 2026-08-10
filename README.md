@@ -33,6 +33,12 @@ For the integration, contacts are associated with companies, deals with companie
 
 Using thin REST clients keeps the API behavior explicit and makes retry and error handling consistent.
 
+### Why custom middleware instead of Whalesync?
+
+I considered using Whalesync because it can provide a faster, low-code Airtable-to-HubSpot synchronization for standard production use cases. I chose custom middleware for this assessment because the requested evaluation areas include create/update decisions, association management, deal-stage mapping, duplicate-event handling, retries, data normalization, and documentation. Delegating those responsibilities to Whalesync would make the implementation faster, but it would provide less evidence of the underlying technical reasoning and backend engineering required by the exercise.
+
+The custom service also makes assessment-specific behavior explicit and testable: stable source-ID upserts, parent-first association handling, replacement of outdated associations, controlled status mapping, `hubspot_record_id` write-back, and recovery when HubSpot succeeds but Airtable write-back fails. For a production project with mostly standard mappings and a preference for reduced maintenance, I would still evaluate Whalesync as a valid build-versus-buy option, comparing subscription cost and platform constraints against the operational cost of owning this middleware.
+
 ## Setup
 
 1. Copy `.env.example` to `.env`.
