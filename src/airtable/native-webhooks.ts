@@ -29,10 +29,12 @@ export class AirtableNativeWebhookProcessor {
   async process(webhookId: string): Promise<void> {
     await this.locks.run(`airtable-webhook:${webhookId}`, async () => {
       const tableNames = await this.getTableNames();
-      let cursor = this.cursors.get(webhookId);
+      // Airtable omits the first pending payload when no cursor is supplied.
+      // Cursor 0 means "from the beginning of this webhook subscription".
+      let cursor = this.cursors.get(webhookId) ?? 0;
       let more = true;
       while (more) {
-        const query = cursor === undefined ? '' : `?cursor=${cursor}`;
+        const query = `?cursor=${cursor}`;
         const page = await this.request<WebhookPayloadPage>(
           `/v0/bases/${this.baseId}/webhooks/${webhookId}/payloads${query}`,
         );
