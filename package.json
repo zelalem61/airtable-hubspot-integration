@@ -11,6 +11,7 @@
     "migrate": "tsx src/cli/migrate.ts",
     "setup:hubspot": "tsx src/cli/setup-hubspot.ts",
     "setup:airtable": "tsx src/cli/setup-airtable.ts",
+    "setup:airtable-webhooks": "tsx src/cli/setup-airtable-webhooks.ts",
     "validate:data": "tsx src/cli/validate-data.ts",
     "test": "vitest run",
     "test:watch": "vitest",

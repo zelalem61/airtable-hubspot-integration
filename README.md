@@ -118,6 +118,18 @@ An optional `line_item_id` can be added. If absent, the Airtable record ID becom
 
 ## Airtable automation
 
+### Free-plan path: native Airtable Webhooks API
+
+The deployed service supports Airtable's native Webhooks API, avoiding the paid **Run a script** automation action. Add the `webhook:manage` scope to the Airtable personal access token, deploy the latest commit, then run:
+
+```bash
+pnpm setup:airtable-webhooks
+```
+
+This creates one subscription per assessment table, watches only business fields (not `hubspot_record_id`), and sends notifications to `/webhooks/airtable-native`. Webhook IDs are recorded locally in the gitignored `.airtable-webhooks.json` file. Airtable webhook subscriptions expire and should be refreshed or recreated before their reported expiration time.
+
+### Paid automation alternative
+
 Create an automation for each table using the "When record created" and "When record updated" triggers. Exclude changes to `hubspot_record_id` from the update trigger when Airtable permits field selection; this avoids an unnecessary second event after ID write-back.
 
 Add a "Run a script" action with input variables `recordId`, `tableName`, `webhookUrl`, and `webhookSecret`:

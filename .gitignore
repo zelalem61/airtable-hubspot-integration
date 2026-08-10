@@ -4,3 +4,4 @@ dist/
 *.log
 .assessment-render/
 migration-report.json
+.airtable-webhooks.json
